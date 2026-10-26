@@ -1,12 +1,6 @@
-# Virtual Environment
-.venv/
-
-# Environment variables
 .env
-
-# Python
+.streamlit/secrets.toml
+.venv/
 __pycache__/
-*.pyc
-
-# macOS
+*.py[cod]
 .DS_Store

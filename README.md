@@ -1,118 +1,119 @@
-# Weather Dashboard
+# Interactive Weather Dashboard
 
-A command-line weather application built with Python that allows users to check the current weather, view a 3-day forecast, and store a search history using the WeatherAPI service.
+A Streamlit web application that displays live current conditions and a three-day
+forecast from WeatherAPI. Users can search by city or ZIP code, switch between
+Fahrenheit and Celsius, explore an interactive Plotly chart, and review the
+underlying forecast data and generated insights.
+
+## Dataset
+
+The app uses the [WeatherAPI forecast API](https://www.weatherapi.com/docs/) as its
+dataset. Each request supplies current conditions plus daily high, average, and low
+temperatures, average humidity, and a condition description. Results are cached for
+10 minutes to limit repeated API requests.
 
 ## Features
 
-* 🌤️ View current weather for any city
-* 📅 View a 3-day weather forecast
-* 📝 Save searched cities to a local history file
-* 🗑️ Clear search history
-* ⚠️ Handles invalid city names and network errors
-* 🔐 Secure API key management using environment variables
-
-## Technologies Used
-
-* Python 3
-* Requests
-* python-dotenv
-* WeatherAPI
-* JSON
+- City or ZIP code search
+- Fahrenheit/Celsius selector
+- Current temperature, humidity, wind, and condition metrics
+- Interactive Plotly three-day temperature chart
+- Forecast data table and automatically calculated insights
+- Friendly handling of empty input, invalid locations, missing credentials, and
+  network errors
 
 ## Project Structure
 
-```
+```text
 weather_dashboard/
-│── main.py
-│── weather.py
-│── menu.py
-│── storage.py
-│── utils.py
-│── history.json
-│── .env
-│── requirements.txt
+├── app.py              # Streamlit application
+├── weather_api.py      # WeatherAPI data access and normalization
+├── main.py             # Original command-line application
+├── menu.py             # CLI menu
+├── storage.py          # CLI search-history storage
+├── utils.py            # CLI display helpers
+├── AGILE.md            # Backlog, sprints, and Agile evidence
+├── tests/              # API data-normalization tests
+├── requirements.txt    # Python dependencies
 └── README.md
 ```
 
-## Installation
+## Run Locally
 
-1. Clone the repository:
+1. Clone the repository and enter the project folder:
 
-```bash
-git clone https://github.com/VicodesRial/weather_dashboard.git
-cd weather_dashboard
-```
+   ```bash
+   git clone https://github.com/VicodesRial/CLI-weather-forecast-dashboard.git
+   cd CLI-weather-forecast-dashboard
+   ```
 
 2. Create and activate a virtual environment:
 
-**macOS/Linux**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+   On Windows, activate it with `.venv\Scripts\activate`.
+
+3. Install the dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Get a free API key from [WeatherAPI](https://www.weatherapi.com/) and create a
+   `.env` file in the project folder:
+
+   ```text
+   WEATHER_API_KEY=your_api_key_here
+   ```
+
+5. Start the app:
+
+   ```bash
+   streamlit run app.py
+   ```
+
+Enter a location in the sidebar, select a temperature unit, and choose **Update
+dashboard**. Hover over the chart points to inspect individual values.
+
+Run the automated tests with:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python -m unittest discover -s tests
 ```
 
-**Windows**
+## Deploy on Streamlit Community Cloud
 
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
+1. Push the project to a public GitHub repository. Do not commit `.env`.
+2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io/) and choose
+   **Create app**.
+3. Select the repository and branch, and set the main file path to `app.py`.
+4. In **Advanced settings > Secrets**, add:
 
-3. Install the required packages:
+   ```toml
+   WEATHER_API_KEY = "your_api_key_here"
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+5. Deploy the app, then add the public app URL to this README and the assignment
+   submission.
 
-4. Create a `.env` file in the project folder:
+## Agile Process
 
-```
-WEATHER_API_KEY=your_api_key_here
-```
+Development uses a lightweight Scrum approach with a product goal, prioritized user
+stories, acceptance criteria, two iterations, a Definition of Done, review, and
+retrospective. See [AGILE.md](AGILE.md) for the project-management evidence.
 
-You can get a free API key from https://www.weatherapi.com/.
+## Deliverable Links
 
-## Running the Project
+- Streamlit app: add the public Streamlit Community Cloud URL after deployment
+- GitHub repository: https://github.com/VicodesRial/CLI-weather-forecast-dashboard
 
-Run the application with:
+## Original CLI
 
-```bash
-python main.py
-```
-
-## Example Menu
-
-```
-========== Weather Dashboard ==========
-1. Current Weather
-2. 3-Day Forecast
-3. Search History
-4. Clear Search History
-5. Exit
-=======================================
-```
-
-## What I Learned
-
-This project helped me practice:
-
-* Working with REST APIs
-* Parsing JSON responses
-* Organizing a Python project into multiple modules
-* File handling with JSON
-* Exception handling
-* Using environment variables to protect API keys
-* Building interactive command-line applications
-
-## Future Improvements
-
-* 7-day forecast support
-* Search history timestamps
-* Weather icons in the terminal
-* Unit conversion (°F / °C)
-* Colorized terminal output
-* Export search history to CSV
+The original interface remains available with `python main.py`. It uses the same
+WeatherAPI integration and local `.env` configuration.
 
 ## License
 
