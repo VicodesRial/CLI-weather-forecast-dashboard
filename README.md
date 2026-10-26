@@ -107,7 +107,7 @@ retrospective. See [AGILE.md](AGILE.md) for the project-management evidence.
 
 ## Deliverable Links
 
-- Streamlit app: add the public Streamlit Community Cloud URL after deployment
+- Streamlit app: https://cli-weather-forecast-dashboard-7naxifnqkvkazpidcysatj.streamlit.app/
 - GitHub repository: https://github.com/VicodesRial/CLI-weather-forecast-dashboard
 
 ## Original CLI
